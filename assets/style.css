@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap");
+.bg {
+  background: url("./undraw_Done_checking_re_6vyx.svg") no-repeat;
+  width: 95%;
+  height: 90vh;
+  background-size: 40%;
+  background-position: center;
+}
+.form-container {
+  position: absolute;
+  top: 15vh;
+  background-color: rgba(255, 255, 255, 0.856);
+  padding: 30px;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #0000004d;
+}
+.logo {
+  font-family: "ZCOOL KuaiLe", cursive;
+}
+
+form input {
+  border-top-style: hidden !important;
+  border-right-style: hidden !important;
+  border-left-style: hidden !important;
+  border-bottom-style: groove !important;
+  background-color: rgba(238, 238, 238, 0) !important;
+  outline: none !important;
+  border-radius: 0% !important;
+}
+
+.card {
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.025);
+}
+
+.card-border-primary {
+  border-top: 4px solid #2979ff;
+}
+
+.card-border-secondary {
+  border-top: 4px solid #efefef;
+}
+
+.card-border-success {
+  border-top: 4px solid #00c853;
+}
+
+.card-border-info {
+  border-top: 4px solid #3d5afe;
+}
+
+.card-border-warning {
+  border-top: 4px solid #ff9100;
+}
+
+.card-border-danger {
+  border-top: 4px solid #ff1744;
+}
+
+.card-border-light {
+  border-top: 4px solid #f8f9fa;
+}
+
+.card-border-dark {
+  border-top: 4px solid #6c757d;
+}
+
+.card-header {
+  border-bottom-width: 1px;
+}
+
+.card-actions a {
+  color: #495057;
+  text-decoration: none;
+}
+
+.card-actions svg {
+  width: 16px;
+  height: 16px;
+}
+
+.card-actions .dropdown {
+  line-height: 1.4;
+}
+
+.card-title {
+  font-weight: 500;
+  margin-top: 0.1rem;
+}
+
+.card-subtitle {
+  font-weight: 400;
+}
+
+.card-table {
+  margin-bottom: 0;
+}
+
+.card-table tr td:first-child,
+.card-table tr th:first-child {
+  padding-left: 1.25rem;
+}
+
+.card-table tr td:last-child,
+.card-table tr th:last-child {
+  padding-right: 1.25rem;
+}
+
+.card-img-top {
+  height: 100%;
+}
+.card {
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.025);
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e5e9f2;
+  border-radius: 0.2rem;
+}
+
+.card-header:first-child {
+  border-radius: calc(0.2rem - 1px) calc(0.2rem - 1px) 0 0;
+}
+
+.card-header {
+  border-bottom-width: 1px;
+}
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  color: inherit;
+  background-color: #fff;
+  border-bottom: 1px solid #e5e9f2;
+}
