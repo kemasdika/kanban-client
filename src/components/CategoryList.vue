@@ -7,10 +7,10 @@
                     <div class="card-body p-3">
                         <TaskList
                         v-for="taskKecil in task.Tasks" :key="taskKecil.id" :taskKecil='taskKecil'
-                         :dataTask='dataTask'
-                         @editTask='editTaskSubmit'
                          :task='task'
                          @deleteTask='deleteThisTask'
+                         @editForm ='editThisForm'
+                         :allData='allData'
                         ></TaskList>
                         <TaskAdd :task='task' @createNewTask="createTask"></TaskAdd>
                 </div>
@@ -27,7 +27,7 @@ export default {
         TaskList,
         TaskAdd
     },
-    props: ['task'],
+    props: ['task','allData'],
     data(){
         return {
             taskCategory: this.task.name,
@@ -37,12 +37,12 @@ export default {
         createTask(newTask) {
             this.$emit('createNewTask', newTask)
         },
-        editTaskSubmit(editTask) {
-            this.$emit('editThisTask', editTask)
-        },
         deleteThisTask(id) {
             this.$emit('deleteTask', id)
         },
+        editThisForm(editTask){
+            this.$emit('editForm',editTask)
+        }
     }
 }
 </script>

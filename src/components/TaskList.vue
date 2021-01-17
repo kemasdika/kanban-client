@@ -7,9 +7,9 @@
             <TaskUpdateForm v-if="isUpdate" 
             :taskKecil='taskKecil' 
             :task='task'
-            :editForm="editForm"
-            @closeEditTaskForm='editStatusToTrue'
-            @editTaskSubmit='editThisTask'
+            @editForm ='editThisForm'
+            @closeFormEdit='closeFormEdit'
+            :allData='allData'
              ></TaskUpdateForm>
             <div class="text-right p-0 m-0">
                 <button type="button" class="btn btn-default btn-sm" @click="changeToUpdateForm">
@@ -30,12 +30,10 @@ export default {
     components: {
         TaskUpdateForm
     },
-    props: ['taskKecil', 'task'],
+    props: ['taskKecil', 'task','allData'],
     data(){
         return{
             isUpdate: false,
-            editTitle: '',
-            editCategory: '',
         }
     },
     methods:{
@@ -45,13 +43,12 @@ export default {
         changeToUpdateForm(){
             this.isUpdate = true
         },
-        editStatusToTrue(id) {
-            this.editForm = id
-            this.isUpdate = !this.isUpdate
+        closeFormEdit(v) {
+            this.isUpdate = v
         },
-        editThisTask(editTask) {
-            this.$emit('editTask', editTask)
-        },
+        editThisForm(editTask){
+            this.$emit('editForm',editTask)
+        }
     }
 
 }

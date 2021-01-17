@@ -6,9 +6,9 @@
                <CategoryList
                v-for="task in dataTask" :key="task.id" :task='task'
                @createNewTask = 'createTask'
-               @editTaskSubmit='editThisTask'
-               :editForm="editForm"
                @deleteTask='deleteThisTask'
+               @editForm ='editThisForm'
+               :allData='dataTask'
                ></CategoryList>
             </div>
         </div>
@@ -24,7 +24,6 @@ export default {
     },
     data(){
         return{
-            editForm:{}
         }
     },
     props: ['dataTask'],
@@ -35,14 +34,9 @@ export default {
         createTask(newTask) {
             this.$emit('createNewTask', newTask)
         },
-         editThisTask(editTask) {
-            this.$emit('editTask', editTask)
-        },
-        editStatusToTrue(id) {
-            this.editForm = id
-            this.editStatus = !this.editStatus
-        },
-
+        editThisForm(editTask){
+            this.$emit('editForm',editTask)
+        }
     }
 
 }

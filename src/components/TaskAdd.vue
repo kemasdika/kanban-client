@@ -1,6 +1,6 @@
 <template>
     <div class="card mb-3 bg-light">
-        <TaskAddForm v-if="isAdd" :task='task' @createTask="addNewTask"></TaskAddForm>        
+        <TaskAddForm v-if="isAdd" :task='task' @createTask="addNewTask" @closeAddForm='closeAddForm'></TaskAddForm>        
         <a href="#" class="btn btn-warning btn-block" @click="changeToFormAdd">Add new</a>
     </div>
 </template>
@@ -20,6 +20,9 @@ export default {
     methods:{
         changeToFormAdd() {
             this.isAdd = true
+        },
+        closeAddForm (v){
+            this.isAdd = v
         },
         addNewTask(newTask) {
         this.$emit('createNewTask', newTask)

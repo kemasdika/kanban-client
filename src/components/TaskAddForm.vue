@@ -24,7 +24,7 @@ export default {
     methods:{
         createTask() {
                 this.$emit('createTask', this.newTask)
-                this.$emit('closeAddForm')
+                this.$emit('closeAddForm',false)
         }
     }
 }

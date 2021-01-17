@@ -19,8 +19,8 @@
         v-if="isLogin"
         :dataTask= 'tasks'
         @createNewTask = 'createTask'
-        @editTask= 'editThisTask'
         @deleteTask='deleteThisTask'
+        @editForm='editThisForm'
         ></KanbanBoard>
     </div>
 </template>
@@ -30,6 +30,7 @@ import Navbar from "./components/Navbar"
 import Auth from "./components/Auth"
 import KanbanBoard from "./components/KanbanBoard"
 import axios from 'axios'
+import Swal from 'sweetalert2'
 export default {
     name: "App",
     data() {
@@ -37,8 +38,10 @@ export default {
          isLogin : false,
          hasAccount : false,
          pageName: 'Auth',
-         url:'http://localhost:3000',
-         tasks:[]
+         url:'https://kanbanku-c.herokuapp.com',
+        //  url:'http://localhost:3000',
+         tasks:[],
+         email:''
         }
     },
     components:{
@@ -82,52 +85,91 @@ export default {
                 }
             })
             .then((data) => {
+                Swal.fire({
+					icon: 'success',
+					title: 'Nice !',
+					text: 'Your new Task has been Created',
+                })
                 this.fetchTask()
             })
             .catch((err) => {
+                Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Something went wrong!',
+                })
                 console.log(err)
             })
         },
-        editThisTask(editTask) {
-            // console.log(editTask, 'dari app')
-            const id = editTask.editTaskId
-            const title = editTask.editTitle
-            const CategoryId = editTask.editCategory
-            axios({
+        deleteThisTask(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios({
+                    url: `${this.url}/tasks/${id}`,
+                    method: 'DELETE',
+                    headers: {
+                    access_token: localStorage.getItem('access_token')
+                    }
+                })
+                .then((data) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Okay..',
+                        text: 'Your task has been Deleted',
+                    })
+                    this.fetchTask()
+                })
+                .catch((err) => {
+                    console.log(err)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Are you sure this is your task?',
+                    })
+                })
+            }
+        })
+        },
+        editThisForm(editTask){
+            const id = editTask.id
+            const title = editTask.title
+            const CategoryId = editTask.category
+              axios({
                 url: `${this.url}/tasks/${id}`,
                 method: 'PUT',
                 headers: {
-                access_token: localStorage.getItem('access_token')
+                    access_token: localStorage.getItem('access_token')
                 },
                 data: {
                     title,
                     CategoryId
                 }
             })
-            .then((response) => {
-                this.fetchTask()
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        },
-        deleteThisTask(id) {
-            if (result.isConfirmed) {
-            axios({
-                url: `${this.url}/tasks/${id}`,
-                method: 'DELETE',
-                headers: {
-                access_token: localStorage.getItem('access_token')
-                }
-            })
             .then((data) => {
+                Swal.fire({
+					icon: 'success',
+					title: 'Nicee!',
+					text: 'Your task has been Edited',
+                })
                 this.fetchTask()
             })
             .catch((err) => {
                 console.log(err)
+                Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Are you sure this is your task?',
+                })
             })
-            }
-        },
+        }
     },
     created() {
         if (localStorage.getItem("access_token")) {

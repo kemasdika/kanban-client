@@ -5,7 +5,7 @@
                 <ul class="navbar-nav"> 
                     <li class="nav-item dropdown"  v-if="isLogin">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            hallo
+                            hai
                         </a>
                         <div class="dropdown-menu">
                             <button class="btn text-danger"  @click.prevent="onSignOut">Logout</button>                                
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     name: "Navbar",
     props: ["changeStatus", "isLogin", "hasAccount", "checkAcc"],
@@ -35,10 +36,27 @@ export default {
         },
         toLogin() {
             this.checkAcc(true);
-        },
+        },  
         onSignOut(){
-            localStorage.clear()
-            this.changeStatus(false);
+            Swal.fire({
+				title: 'Are you sure?',
+				text: "You can back any time to see your task",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: "Yes, i'm leaving~"
+			}).then((result) => {
+				if (result.isConfirmed) {
+                    localStorage.clear()
+                    this.changeStatus(false);
+					Swal.fire({
+						icon: 'success',
+						title: 'Good Bye',
+						text: 'Thank you for your visit, have a nice day',
+					})
+				}
+			})
         }
     }
 }

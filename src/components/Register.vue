@@ -36,6 +36,7 @@
 <script>
 import axios from "axios"
 import GoogleSignInButton from 'vue-google-signin-button-directive'
+import Swal from 'sweetalert2'
 export default {
     name:"Register",
     props: ["checkAcc",'fetchTask','changeStatus'],
@@ -43,8 +44,8 @@ export default {
         return {
             email: "",
             password: "",
-            url: "http://localhost:3000",
-            clientId: '814646317355-7kb2krb937suas00beohh2idv5pmkbum.apps.googleusercontent.com'
+            url: "https://kanbanku-c.herokuapp.com",
+            clientId: '814646317355-v8pgb06iql2klkvpvfj9n7cadj9pnpck.apps.googleusercontent.com'
         }
     },
     methods: {
@@ -62,10 +63,20 @@ export default {
                 }
             })
             .then((response) => {
+                Swal.fire({
+					icon: 'success',
+					title: 'Nice !',
+					text: 'Your new Account has been create',
+				})
                 this.checkAcc(true)
                 console.log('register berhasil')
             })
             .catch(err => {
+                Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Something went wrong!',
+				})
                 console.log(err)
             })
         },
@@ -80,16 +91,31 @@ export default {
             })
             .then((response) => {
                     localStorage.setItem('access_token', response.data.access_token)
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Hi ${this.email_input}`,
+                        text: 'Welcome to Kanban Apps ',
+                    })
                     this.changeStatus(true)
                     this.fetchTask()
                         // console.log(response)
             })
             .catch((err) => {
                 console.log(err)
+                Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Something went wrong, Check again your Google Account!',
+				})
             })
         },
         OnGoogleAuthFail (error) {
-			console.log(error)
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Are You Sure with your Google Account?',
+            })
         }
     }
 }
